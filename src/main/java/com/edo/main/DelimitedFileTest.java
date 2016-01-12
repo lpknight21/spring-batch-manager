@@ -11,7 +11,7 @@ public class DelimitedFileTest {
 
     public static void main(String[] args) {
 
-        FileSchema delimitedSchema = FieldTestDataUtil.createDelimitedSchema("Basic Delimited File", "|",
+        FileSchema delimitedSchema = FieldTestDataUtil.createDelimitedSchema("Raw Delimited File", "|",
                 FieldTestDataUtil.createFieldsForDelimitedFile(), FileType.DELIMITED);
 
         FileSchema standardSchema = FieldTestDataUtil.createDelimitedStandardSchema();
