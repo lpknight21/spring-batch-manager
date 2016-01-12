@@ -12,7 +12,7 @@ public class FixedFileTest {
 
     public static void main(String[] args) {
 
-        FileSchema fixedWidthSchema = FieldTestDataUtil.createDelimitedSchema("Basic Fixed Width File", "",
+        FileSchema fixedWidthSchema = FieldTestDataUtil.createDelimitedSchema("Raws Fixed Width File", "",
                 FieldTestDataUtil.createFieldsForFixedWidthFile(), FileType.FIXED);
 
         FileSchema standardSchema = FieldTestDataUtil.createDelimitedStandardSchema();
