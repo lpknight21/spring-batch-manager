@@ -9,7 +9,7 @@ public class DelimitedFileTest {
 
     private static final String DELIMITED_FILE_LINE = "cardholder|token|3|4|fiid";
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         FileSchema delimitedSchema = FieldTestDataUtil.createDelimitedSchema("Raw Delimited File", "|",
                 FieldTestDataUtil.createFieldsForDelimitedFile(), FileType.DELIMITED);
@@ -17,5 +17,5 @@ public class DelimitedFileTest {
         FileSchema standardSchema = FieldTestDataUtil.createDelimitedStandardSchema();
 
         FieldTestUtil.convertFile(delimitedSchema, standardSchema, DELIMITED_FILE_LINE);
-    }
+    }*/
 }
