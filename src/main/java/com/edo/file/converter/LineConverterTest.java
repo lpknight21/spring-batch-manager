@@ -1,7 +1,7 @@
-package com.edo.converter;
+package com.edo.file.converter;
 
-import com.edo.builder.FileSchemaBuilder;
-import com.edo.file.FileSchema;
+import com.edo.file.builder.FileSchemaBuilder;
+import com.edo.file.model.FileSchema;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,11 +1,6 @@
-package com.edo.main;
+package com.edo.file.main;
 
-import com.edo.file.FileSchema;
-import com.edo.file.FileType;
-import com.edo.util.FieldTestDataUtil;
-import com.edo.util.FieldTestUtil;
-
-public class DelimitedFileTest {
+public class DelimitedFileMain {
 
     private static final String DELIMITED_FILE_LINE = "cardholder|token|3|4|fiid";
 

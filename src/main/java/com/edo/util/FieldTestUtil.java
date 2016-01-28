@@ -1,8 +1,8 @@
 package com.edo.util;
 
-import com.edo.file.Field;
-import com.edo.file.FileSchema;
-import com.edo.file.FileType;
+import com.edo.file.model.Field;
+import com.edo.file.model.FileSchema;
+import com.edo.file.model.FileType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

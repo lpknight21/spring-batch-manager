@@ -1,7 +1,7 @@
-package com.edo.converter;
+package com.edo.file.converter;
 
-import com.edo.file.Field;
-import com.edo.file.FileSchema;
+import com.edo.file.model.Field;
+import com.edo.file.model.FileSchema;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

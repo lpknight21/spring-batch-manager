@@ -1,10 +1,10 @@
 package com.edo.util;
 
-import com.edo.builder.FileSchemaBuilder;
-import com.edo.file.Field;
-import com.edo.file.FieldType;
-import com.edo.file.FileSchema;
-import com.edo.file.FileType;
+import com.edo.file.builder.FileSchemaBuilder;
+import com.edo.file.model.Field;
+import com.edo.file.model.FieldType;
+import com.edo.file.model.FileSchema;
+import com.edo.file.model.FileType;
 
 import java.util.ArrayList;
 import java.util.List;

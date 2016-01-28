@@ -1,7 +1,7 @@
-package com.edo.builder;
+package com.edo.file.builder;
 
-import com.edo.file.Field;
-import com.edo.file.FieldType;
+import com.edo.file.model.Field;
+import com.edo.file.model.FieldType;
 
 public class FieldBuilder {
 

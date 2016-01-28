@@ -1,4 +1,4 @@
-package com.edo.file;
+package com.edo.file.model;
 
 public class Field {
 
