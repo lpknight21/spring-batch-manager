@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 @Configuration
 public class BatchConfiguration {
@@ -45,7 +46,7 @@ public class BatchConfiguration {
     @StepScope
     public FlatFileItemReader<Person> reader(@Value("#{jobParameters[inputPath]}") String inputPath) {
         FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
-        reader.setResource(new ClassPathResource(inputPath));
+        reader.setResource(new FileSystemResource(inputPath));
         reader.setLineMapper(new DefaultLineMapper<Person>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames(new String[] { "firstName", "lastName" });
