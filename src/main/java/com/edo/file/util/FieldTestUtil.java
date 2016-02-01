@@ -1,4 +1,4 @@
-package com.edo.util;
+package com.edo.file.util;
 
 import com.edo.file.model.Field;
 import com.edo.file.model.FileSchema;
