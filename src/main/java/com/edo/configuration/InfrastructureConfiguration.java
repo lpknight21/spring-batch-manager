@@ -7,5 +7,5 @@ import javax.sql.DataSource;
 public interface InfrastructureConfiguration {
 
     @Bean
-    public abstract DataSource dataSource();
+    DataSource dataSource();
 }

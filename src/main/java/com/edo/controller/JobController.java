@@ -7,6 +7,7 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class JobController {
     @Autowired
     Job job;
 
-    @RequestMapping("start")
+    @RequestMapping(value = "start", method = RequestMethod.POST)
     public JobInstance startJob(@RequestParam String inputPath) throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("inputPath", new JobParameter(inputPath));
