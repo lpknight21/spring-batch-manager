@@ -21,11 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 
 @Configuration
-public class BatchConfiguration {
+public class UserImportJobConfiguration {
 
     @Autowired
     private JobBuilderFactory jobBuilders;
@@ -87,7 +86,7 @@ public class BatchConfiguration {
     @Bean
     public Step step1() {
         return stepBuilders.get("step1")
-                .<Person, Person> chunk(10)
+                .<Person, Person>chunk(10)
                 .reader(reader(OVERRIDDEN_BY_EXPRESSION))
                 .processor(processor())
                 .writer(writer())
