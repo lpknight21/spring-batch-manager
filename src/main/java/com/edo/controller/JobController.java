@@ -38,4 +38,12 @@ public class JobController {
         }
         return jobParameterMap;
     }
+
+    private String getJobParametersToString(List<ParameterPair> parameterPairList) {
+        String parameters = "";
+        for(ParameterPair parameterPair : parameterPairList) {
+            parameters = parameters + parameterPair.getName() + "=" + parameterPair.getValue() + "\n";
+        }
+        return parameters;
+    }
 }
