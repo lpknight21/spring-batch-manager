@@ -2,7 +2,11 @@ package com.edo.controller;
 
 import com.edo.model.ParameterPair;
 import org.springframework.batch.core.*;
+import org.springframework.batch.core.explore.JobExplorer;
+import org.springframework.batch.core.launch.JobInstanceAlreadyExistsException;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.launch.JobOperator;
+import org.springframework.batch.core.launch.NoSuchJobException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
@@ -22,12 +26,19 @@ public class JobController {
     JobLauncher jobLauncher;
 
     @Autowired
+    JobOperator jobOperator;
+
+    @Autowired
+    JobExplorer jobExplorer;
+
+    @Autowired
     ApplicationContext applicationContext;
 
     @RequestMapping(value = "start/{jobName}", method = RequestMethod.POST)
-    public JobInstance startJob(@PathVariable String jobName, @RequestBody List<ParameterPair> parameterPairs) throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+    public JobInstance startJob(@PathVariable String jobName, @RequestBody List<ParameterPair> parameterPairs) throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobInstanceAlreadyExistsException, NoSuchJobException {
         Job job = (Job) applicationContext.getBean(jobName);
-        JobExecution jobExecution = jobLauncher.run(job, new JobParameters(getJobParameters(parameterPairs)));
+        Long executionId = jobOperator.start(jobName, getJobParametersToString(parameterPairs));
+        JobExecution jobExecution = jobExplorer.getJobExecution(executionId);
         return jobExecution.getJobInstance();
     }
 
