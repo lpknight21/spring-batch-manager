@@ -41,7 +41,7 @@ public class UserImportJobConfiguration {
     private static final String OVERRIDDEN_BY_EXPRESSION = null;
 
     // tag::readerwriterprocessor[]
-    @Bean
+    @Bean(name = "importUserReader")
     @StepScope
     public FlatFileItemReader<Person> reader(@Value("#{jobParameters[inputPath]}") String inputPath) {
         FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
@@ -57,12 +57,12 @@ public class UserImportJobConfiguration {
         return reader;
     }
 
-    @Bean
+    @Bean(name = "importUserProcessor")
     public ItemProcessor<Person, Person> processor() {
         return new PersonItemProcessor();
     }
 
-    @Bean
+    @Bean(name = "importUserWriter")
     public ItemWriter<Person> writer() {
         JdbcBatchItemWriter<Person> writer = new JdbcBatchItemWriter<>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Person>());
@@ -73,19 +73,19 @@ public class UserImportJobConfiguration {
     // end::readerwriterprocessor[]
 
     // tag::jobstep[]
-    @Bean
+    @Bean(name = "importUserJob")
     public Job importUserJob() {
         return jobBuilders.get("importUserJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(jobCompletionNotificationListener)
-                .flow(step1())
+                .flow(step())
                 .end()
                 .build();
     }
 
-    @Bean
-    public Step step1() {
-        return stepBuilders.get("step1")
+    @Bean(name = "importUserStep")
+    public Step step() {
+        return stepBuilders.get("importUserStep")
                 .<Person, Person>chunk(10)
                 .reader(reader(OVERRIDDEN_BY_EXPRESSION))
                 .processor(processor())
