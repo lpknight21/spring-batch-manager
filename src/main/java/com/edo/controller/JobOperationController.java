@@ -32,8 +32,7 @@ public class JobOperationController {
 
     @RequestMapping(value = "restart")
     public BatchStatus restart(@PathVariable(EXECUTION_ID) long executionId) throws JobParametersInvalidException, JobRestartException, JobInstanceAlreadyCompleteException, NoSuchJobExecutionException, NoSuchJobException {
-        jobOperator.restart(executionId);
-        return getStatus(executionId);
+        return getStatus(jobOperator.restart(executionId));
     }
 
     @RequestMapping(value = "status")
