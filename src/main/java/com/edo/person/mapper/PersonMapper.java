@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+
 public interface PersonMapper {
+    @Select("SELECT * FROM people WHERE person_id = #{personId}")
     @Results({
             @Result(property = "firstName", column = "first_name"),
             @Result(property = "lastName", column = "last_name")
     })
-
-    @Select("SELECT * FROM people WHERE person_id = #{personId}")
     Person getPerson(long personId);
 
     @Insert("INSERT INTO people (first_name, last_name) VALUES (#{firstName}, #{lastName})")
@@ -24,5 +24,9 @@ public interface PersonMapper {
     List<Person> getPeopleByCreatedTimestamp(String timestamp);
 
     @Select("SELECT first_name, last_name FROM people")
+    @Results({
+            @Result(property = "firstName", column = "first_name"),
+            @Result(property = "lastName", column = "last_name")
+    })
     List<Person> getPeople();
 }

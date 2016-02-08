@@ -21,15 +21,9 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
     private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
-    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     private PersonService personService;
-
-    @Autowired
-    public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public void afterJob(JobExecution jobExecution) {
@@ -37,12 +31,6 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             log.info("!!! JOB FINISHED! Time to verify the results");
 
             List<Person> results = personService.getPeople();
-            /*List<Person> results = jdbcTemplate.query("SELECT first_name, last_name FROM people", new RowMapper<Person>() {
-                @Override
-                public Person mapRow(ResultSet rs, int row) throws SQLException {
-                    return new Person(rs.getString(1), rs.getString(2));
-                }
-            });*/
 
             for (Person person : results) {
                 log.info("Found " + person + " in the database.");

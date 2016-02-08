@@ -3,7 +3,6 @@ package com.edo.person.model;
 import com.google.gson.Gson;
 
 public class Person {
-
     private String lastName;
     private String firstName;
 

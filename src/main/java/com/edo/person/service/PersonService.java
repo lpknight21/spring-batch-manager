@@ -2,6 +2,8 @@ package com.edo.person.service;
 
 import com.edo.person.mapper.PersonMapper;
 import com.edo.person.model.Person;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
