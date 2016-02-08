@@ -2,11 +2,18 @@ package com.edo.person.mapper;
 
 import com.edo.person.model.Person;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface PersonMapper {
+    @Results({
+            @Result(property = "firstName", column = "first_name"),
+            @Result(property = "lastName", column = "last_name")
+    })
+
     @Select("SELECT * FROM people WHERE person_id = #{personId}")
     Person getPerson(long personId);
 
@@ -17,5 +24,5 @@ public interface PersonMapper {
     List<Person> getPeopleByCreatedTimestamp(String timestamp);
 
     @Select("SELECT first_name, last_name FROM people")
-    List<Person> getAll();
+    List<Person> getPeople();
 }

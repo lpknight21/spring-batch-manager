@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PeopleService {
+public class PersonService {
 
     @Autowired
     private PersonMapper personMapper;
@@ -21,7 +21,7 @@ public class PeopleService {
         return personMapper.getPerson(id);
     }
 
-    public List<Person> getAll() {
-        return personMapper.getAll();
+    public List<Person> getPeople() {
+        return personMapper.getPeople();
     }
 }
