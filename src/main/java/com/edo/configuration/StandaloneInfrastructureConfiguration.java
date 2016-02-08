@@ -1,5 +1,8 @@
 package com.edo.configuration;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor;
@@ -19,6 +22,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import javax.sql.DataSource;
 
 @Configuration
+@MapperScan(basePackages = "com.edo")
 @EnableBatchProcessing
 public class StandaloneInfrastructureConfiguration  implements InfrastructureConfiguration {
 
@@ -39,6 +43,13 @@ public class StandaloneInfrastructureConfiguration  implements InfrastructureCon
                 .addScript("classpath:schema-all.sql")
                 .setType(EmbeddedDatabaseType.HSQL)
                 .build();
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        return sessionFactory.getObject();
     }
 
     @Bean
@@ -66,6 +77,4 @@ public class StandaloneInfrastructureConfiguration  implements InfrastructureCon
         jobOperator.setJobRepository(jobRepository);
         return jobOperator;
     }
-
-
 }

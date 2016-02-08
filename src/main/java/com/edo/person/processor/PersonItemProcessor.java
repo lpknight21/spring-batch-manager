@@ -10,7 +10,7 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
     private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);
 
     @Override
-    public Person process(final Person person) throws Exception {
+    public Person process(final Person person) {
         final String firstName = person.getFirstName().toUpperCase();
         final String lastName = person.getLastName().toUpperCase();
 

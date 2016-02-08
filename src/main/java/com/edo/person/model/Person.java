@@ -1,5 +1,7 @@
 package com.edo.person.model;
 
+import com.google.gson.Gson;
+
 public class Person {
 
     private String lastName;
@@ -31,6 +33,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "firstName: " + firstName + ", lastName: " + lastName;
+        return new Gson().toJson(this);
     }
 }
