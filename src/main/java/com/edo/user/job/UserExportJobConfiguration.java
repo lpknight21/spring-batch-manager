@@ -1,6 +1,6 @@
-package com.edo.person.job;
+package com.edo.user.job;
 
-import com.edo.person.model.Person;
+import com.edo.user.model.User;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisPagingItemReader;
 import org.springframework.batch.core.Job;
@@ -47,7 +47,7 @@ public class UserExportJobConfiguration {
     @Bean(name = "exportUserStep")
     public Step step() {
         return stepBuilders.get("exportUserStep")
-                .<Person, Person> chunk(5)
+                .<User, User> chunk(5)
                 .reader(reader(OVERRIDDEN_BY_EXPRESSION))
                 .writer(writer(OVERRIDDEN_BY_EXPRESSION))
                 .build();
@@ -55,35 +55,35 @@ public class UserExportJobConfiguration {
 
     @Bean(name = "userExportReader")
     @StepScope
-    public MyBatisPagingItemReader<Person> reader(@Value("#{jobParameters[lastRunTime]}") String lastRunTime) {
+    public MyBatisPagingItemReader<User> reader(@Value("#{jobParameters[lastRunTime]}") String lastRunTime) {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("timestamp", lastRunTime);
 
-        MyBatisPagingItemReader<Person> reader = new MyBatisPagingItemReader<>();
+        MyBatisPagingItemReader<User> reader = new MyBatisPagingItemReader<>();
         reader.setParameterValues(queryParams);
         reader.setSqlSessionFactory(sqlSessionFactory);
-        reader.setQueryId("getPeopleByCreatedTimestamp");
+        reader.setQueryId("getUsersByTimestamp");
         return reader;
     }
 
     @Bean(name = "exportUserWriter")
     @StepScope
-    public FlatFileItemWriter<Person> writer(@Value("#{jobParameters[outputPath]}") String outputPath) {
-        FlatFileItemWriter<Person> writer = new FlatFileItemWriter<>();
+    public FlatFileItemWriter<User> writer(@Value("#{jobParameters[outputPath]}") String outputPath) {
+        FlatFileItemWriter<User> writer = new FlatFileItemWriter<>();
         writer.setResource(new FileSystemResource(outputPath));
         writer.setLineAggregator(getAggregator());
         return writer;
     }
 
-    private DelimitedLineAggregator<Person> getAggregator() {
-        DelimitedLineAggregator<Person> aggregator = new DelimitedLineAggregator<>();
+    private DelimitedLineAggregator<User> getAggregator() {
+        DelimitedLineAggregator<User> aggregator = new DelimitedLineAggregator<>();
         aggregator.setDelimiter("|");
         aggregator.setFieldExtractor(getFieldExtractor());
         return aggregator;
     }
 
-    private BeanWrapperFieldExtractor<Person> getFieldExtractor() {
-        BeanWrapperFieldExtractor<Person> extractor = new BeanWrapperFieldExtractor<>();
+    private BeanWrapperFieldExtractor<User> getFieldExtractor() {
+        BeanWrapperFieldExtractor<User> extractor = new BeanWrapperFieldExtractor<>();
         extractor.setNames(new String[] {"lastName", "firstName"});
         return extractor;
     }

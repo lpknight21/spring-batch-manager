@@ -1,7 +1,6 @@
-package com.edo.person.job;
+package com.edo.user.job;
 
-import com.edo.person.model.Person;
-import com.edo.person.processor.PersonItemProcessor;
+import com.edo.user.model.User;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.Job;
@@ -10,7 +9,6 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -53,9 +51,8 @@ public class UserImportJobConfiguration {
     @Bean(name = "importUserStep")
     public Step step() {
         return stepBuilders.get("importUserStep")
-                .<Person, Person>chunk(10)
+                .<User, User>chunk(10)
                 .reader(reader(OVERRIDDEN_BY_EXPRESSION))
-                .processor(processor())
                 .writer(writer())
                 .build();
     }
@@ -64,30 +61,25 @@ public class UserImportJobConfiguration {
     // tag::readerwriterprocessor[]
     @Bean(name = "importUserReader")
     @StepScope
-    public FlatFileItemReader<Person> reader(@Value("#{jobParameters[inputPath]}") String inputPath) {
-        FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
+    public FlatFileItemReader<User> reader(@Value("#{jobParameters[inputPath]}") String inputPath) {
+        FlatFileItemReader<User> reader = new FlatFileItemReader<>();
         reader.setResource(new FileSystemResource(inputPath));
-        reader.setLineMapper(new DefaultLineMapper<Person>() {{
+        reader.setLineMapper(new DefaultLineMapper<User>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames(new String[] { "firstName", "lastName" });
             }});
-            setFieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
-                setTargetType(Person.class);
+            setFieldSetMapper(new BeanWrapperFieldSetMapper<User>() {{
+                setTargetType(User.class);
             }});
         }});
         return reader;
     }
 
-    @Bean(name = "importUserProcessor")
-    public ItemProcessor<Person, Person> processor() {
-        return new PersonItemProcessor();
-    }
-
     @Bean(name = "importUserWriter")
-    public ItemWriter<Person> writer() {
-        MyBatisBatchItemWriter<Person> writer = new MyBatisBatchItemWriter<>();
+    public ItemWriter<User> writer() {
+        MyBatisBatchItemWriter<User> writer = new MyBatisBatchItemWriter<>();
         writer.setSqlSessionFactory(sqlSessionFactory);
-        writer.setStatementId("addPerson");
+        writer.setStatementId("addUser");
         return writer;
     }
     // end::readerwriterprocessor[]

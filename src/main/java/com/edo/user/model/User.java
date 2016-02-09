@@ -1,26 +1,26 @@
-package com.edo.person.model;
+package com.edo.user.model;
 
 import com.google.gson.Gson;
 
-public class Person {
-    private Long personId;
+public class User {
+    private Long id;
     private String lastName;
     private String firstName;
 
-    public Person() {
+    public User() {
     }
 
-    public Person(String firstName, String lastName) {
+    public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Long getPersonId() {
-        return personId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLastName() {
