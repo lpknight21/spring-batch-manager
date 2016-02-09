@@ -1,4 +1,4 @@
-package com.edo.user.processor;
+package com.edo.user.configuration.processor;
 
 import com.edo.user.model.User;
 import org.slf4j.Logger;

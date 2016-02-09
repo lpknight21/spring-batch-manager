@@ -10,8 +10,7 @@ import java.util.List;
 @Service
 public class UserDAO {
 
-    @Autowired
-    private UserMapper userMapper;
+    @Autowired private UserMapper userMapper;
 
     public long addUser(User user) {
         return userMapper.addUser(user);

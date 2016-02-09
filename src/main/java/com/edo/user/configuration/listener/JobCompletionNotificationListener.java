@@ -1,4 +1,4 @@
-package com.edo.user.job;
+package com.edo.user.configuration.listener;
 
 import com.edo.user.model.User;
 import com.edo.user.dao.UserDAO;

@@ -1,5 +1,6 @@
-package com.edo.user.job;
+package com.edo.user.configuration;
 
+import com.edo.user.configuration.listener.JobCompletionNotificationListener;
 import com.edo.user.model.User;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
